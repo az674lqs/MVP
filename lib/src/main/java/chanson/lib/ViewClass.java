@@ -5,6 +5,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import chanson.lib.view.IView;
+
 /**
  * Created by Chanson on 2016/5/19.
  */

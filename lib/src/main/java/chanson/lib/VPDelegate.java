@@ -4,6 +4,8 @@ import android.view.View;
 
 import java.util.HashMap;
 
+import chanson.lib.presenter.IPresenter;
+import chanson.lib.view.IView;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -18,12 +20,15 @@ public class VPDelegate {
 
     public void append(IPresenter p){
         ViewClass viewClass = p.getClass().getAnnotation(ViewClass.class);
-        if(viewClass == null){
+        ViewData viewDataClass = p.getClass().getAnnotation(ViewData.class);
+        if(viewClass == null || viewDataClass == null){
             throw new RuntimeException("warning");
         }
         IView view = null;
+        VPData data = null;
         try {
             view = viewClass.value().newInstance();
+            data = viewDataClass.value().newInstance();
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
